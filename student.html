@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Sprouts Student</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="styles/student.css">
+    <link rel="stylesheet" href="styles/glider.css">
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="scripts/glider.min.js"></script>
+    <script src="scripts/student.js"></script>
+    <script>
+      window.addEventListener('load', function(){
+        new Glider(document.querySelector('.glider'), {
+          slidesToShow: 4,
+          slidesToScroll: 5,
+          draggable: true,
+          arrows: {
+            prev: '.glider-prev',
+            next: '.glider-next'
+          }
+        })
+      })
+    </script>
+  </head>
+  <body>
+    
+    <div class="background">
+      <div id="plantContainer" class="plantContainer">
+        <img class="plant" id="plant0" src="images/sprout0.png"/>
+        <img class="plant" id="plant1" src="images/sprout1.png" style="display: none"/>
+        <img class="plant" id="plant2" src="images/sprout2.png" style="display: none"/>
+        <img class="plant" id="plant3" src="images/sprout3.png" style="display: none"/>
+        <img class="plant" id="plant4" src="images/sprout4.png" style="display: none"/>
+        <img class="plant" id="plant5" src="images/sprout5.png" style="display: none"/>
+        <img class="plant" id="plant6" src="images/sprout6.png" style="display: none"/>
+      </div>
+      <div class="soilContainer">
+        <div class="soil"></div>
+      </div>
+      <div class="container" id="instructions-page" style="display:none">
+        <h2 class="header">Share about the photo!</h2>
+        <h4 class="description">You have 3 minutes to share</h4>
+        <img id="selected-img" src="" />
+        
+        <!--%%%%%%% Change name %%%%%%%%%%-->
+        <div id="ready-box">
+          <h5>The timer will start when you and your parent are both ✅ ready</h5>
+          <div>Parent is <span id="status">❌ ready</span></div>
+          <button id="ready-btn" class="not-ready" onclick="ready(this)">I am ❌ ready!</button>
+        </div>
+        
+        <div id="timer-box" style="display:none">
+          <div id="time">03:00</div>
+          <button onclick="finishedConvo()">Finished!</button>
+        </div>
+     
+        <div id="worksheet" style="display:none">
+          This photo shows the value of <span id="value"></span> because <textarea id="textField"></textarea>
+          <button id="submit" onclick="submit()">Submit</button>
+        </div>
+      </div>
+      <div class="container" id="selection-page">
+        <h2 class="header">Your unfilled buckets</h2>
+        <h4 class="description">To grow your plant, select a photo to talk about with your parent or teacher!</h4>
+        <div class="glider-contain">
+          <div class="glider">
+            <div id="responsibility1" onclick="selectThumb(this)"><img src="captures/responsibility1.png" /> Responsibility</div>
+            <div id="responsibility2" onclick="selectThumb(this)"><img src="captures/responsibility2.png" /> Responsibility</div>
+            <!-- <div id="responsibility3" onclick="selectThumb(this)"><img src="captures/responsibility3.png" /> Responsibility</div> -->
+            <!-- <div id="responsibility4" onclick="selectThumb(this)"><img src="captures/responsibility4.png" /> Responsibility</div> -->
+            <div id="respect1" onclick="selectThumb(this)"><img src="captures/respect1.png" /> Respect</div>
+            <div id="respect2" onclick="selectThumb(this)"><img src="captures/respect2.png" /> Respect</div>
+            <!-- <div id="respect3" onclick="selectThumb(this)"><img src="captures/respect3.png" /> Respect</div> -->
+            <!-- <div id="respect4" onclick="selectThumb(this)"><img src="captures/respect4.png" /> Respect</div> -->
+          </div>
+          <button aria-label="Previous" class="glider-prev">«</button>
+          <button aria-label="Next" class="glider-next">»</button>
+        </div>
+        <button disabled id="select" aria-label="Select" onclick="selectImg()">Select</button>
+      </div>
+      <div class="container" id="empty-page" style="display:none">
+        <h2 class="header">All buckets filled!</h2>
+        <h4 class="description">Capture more pictures to collect more buckets & grow your plant</h4>
+      </div>
+      
+      <!-- <div id="sessionId"></div> -->
+    </div>
+
+  </body>
+</html>
